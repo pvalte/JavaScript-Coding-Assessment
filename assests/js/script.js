@@ -3,6 +3,24 @@ window.onload = function () {
     //constants
     var score = 0;
     var timer = 75;
+    var questionNumber = 0;
+    var questionObjArray = [
+        {
+            question: "What is your favorite color?",
+            answers: ["red", "blue", "purple", "orange"],
+            correctAnswer: "blue"
+        },
+        {
+            question: "What is your favorite food?",
+            answers: ["yogurt", "pizza", "yams", "orzo"],
+            correctAnswer: "yams"
+        },
+        {
+            question: "What is your favorite season?",
+            answers: ["fall", "winter", "summer", "spring"],
+            correctAnswer: "fall"
+        }
+    ]
 
     //elements
     var timerEl = document.querySelector('#timer');
@@ -32,23 +50,24 @@ window.onload = function () {
         startCountdown();
 
         //create first question
-        createQuestion();
+        var questionObj = questionObjArray[questionNumber];
+        createQuestion(questionObj);
     }
 
-    var createQuestion = function () {    
+    var createQuestion = function (questionObj) {    
         //div to hold question
         var questionDivEl = document.createElement("div");
         questionDivEl.className = "question";
         
         //header
-        var questionHeader = document.createElement("h2");
-        questionHeader.textContent = "What is your favorite color?";
+        var questionHeader = document.createElement("h1");
+        questionHeader.textContent = questionObj.question;
         
         //options
         var answersList = document.createElement("ul");
         answersList.className = "answer-list";
 
-        var answersArray = ["red", "blue", "purple", "orange"];
+        var answersArray = questionObj.answers;
         for (var i = 0; i < answersArray.length; i++) {
             var answer = document.createElement("li");
             answer.textContent = answersArray[i];
@@ -70,6 +89,32 @@ window.onload = function () {
         if (event.target.matches(".answer")) {
             alert("you have chosen!");
         }
+
+        questionNumber++;
+        //clear question
+        mainEl.removeChild(document.querySelector(".question"));
+
+        //next question
+        if (questionNumber < questionObjArray.length) {
+            //next question
+            createQuestion(questionObjArray[questionNumber]);    
+        }
+        else {
+            endQuiz()
+        }
+    }
+
+    var endQuiz = function() {
+        //header
+        var finalHeader = document.createElement("h1");
+        finalHeader.textContent = "All Done!";
+
+        var finalScore = document.createElement("h2");
+        finalScore.textContent = "Your final score is " + score;
+
+        mainEl.appendChild(finalHeader);
+        mainEl.appendChild(finalScore);
+        
     }
 
     //if correct answer
