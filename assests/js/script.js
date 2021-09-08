@@ -1,8 +1,8 @@
 window.onload = function () {
 
     //constants
-    var score = 0;
     var timer = 75;
+
     var questionNumber = 0;
     var questionObjArray = [
         {
@@ -29,15 +29,19 @@ window.onload = function () {
     var startButtonEl = document.querySelector('#start-button');
 
     //functions
-    function startCountdown() {
+    var startCountdown = function() {
         var timerCountDown = setInterval(function () {
-            if (timer > 1) {
+            if (timer > 0) {
                 timerEl.textContent = 'Time: ' + timer;
                 timer--;
-            } else {
+            }
+            else if (!timer) {
+                clearInterval(timerCountDown);
+            }
+            else {
                 timerEl.textContent = 'Time: ' + timer;
                 clearInterval(timerCountDown);
-                //END THE QUIZ
+                endQuiz();
             }
         }, 1000); //Count down every second
     }
@@ -90,12 +94,12 @@ window.onload = function () {
             alert("you have chosen!");
         }
 
-        questionNumber++;
-        //clear question
-        mainEl.removeChild(document.querySelector(".question"));
-
         //next question
+        questionNumber++;
         if (questionNumber < questionObjArray.length) {
+            //clear question
+            mainEl.removeChild(document.querySelector(".question"));
+
             //next question
             createQuestion(questionObjArray[questionNumber]);    
         }
@@ -105,16 +109,24 @@ window.onload = function () {
     }
 
     var endQuiz = function() {
+        //freeze time / set score
+        var score = timer;
+        timer = "";
+        timerEl.textContent = 'Time: ' + score;
+
+        //clear question
+        mainEl.removeChild(document.querySelector(".question"));
+        
         //header
         var finalHeader = document.createElement("h1");
         finalHeader.textContent = "All Done!";
+
 
         var finalScore = document.createElement("h2");
         finalScore.textContent = "Your final score is " + score;
 
         mainEl.appendChild(finalHeader);
-        mainEl.appendChild(finalScore);
-        
+        mainEl.appendChild(finalScore);   
     }
 
     //if correct answer
