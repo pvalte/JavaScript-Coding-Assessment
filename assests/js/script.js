@@ -26,6 +26,7 @@ window.onload = function () {
     var timerEl = document.querySelector('#timer');
     var mainEl = document.querySelector('#main');
     var homepageEl = document.querySelector('#homepage');
+    var feedbackEl = document.querySelector('#answer-feedback');
     var startButtonEl = document.querySelector('#start-button');
 
     //functions
@@ -35,7 +36,7 @@ window.onload = function () {
                 timerEl.textContent = 'Time: ' + timer;
                 timer--;
             }
-            else if (!timer) {
+            else if (timer === "") {
                 clearInterval(timerCountDown);
             }
             else {
@@ -91,8 +92,17 @@ window.onload = function () {
     //when "answer button" is clicked
     var answerHandler = function(event) {
         if (event.target.matches(".answer")) {
-            alert("you have chosen!");
+            if (event.target.textContent === questionObjArray[questionNumber].correctAnswer) {
+                //add feedback
+                var feedback = "Correct!";
+            }
+            else {
+                //add feedback
+                var feedback = "Wrong :(";
+                //subtract from timer
+            }
         }
+        feedbackEl.textContent = feedback;
 
         //next question
         questionNumber++;
@@ -101,7 +111,7 @@ window.onload = function () {
             mainEl.removeChild(document.querySelector(".question"));
 
             //next question
-            createQuestion(questionObjArray[questionNumber]);    
+            createQuestion(questionObjArray[questionNumber]);
         }
         else {
             endQuiz()
@@ -129,17 +139,6 @@ window.onload = function () {
         mainEl.appendChild(finalScore);   
     }
 
-    //if correct answer
-    //add feedback
-    //add to score
-
-
-    //if wromg answer
-    //add feedback
-    //subtract from score?
-    //subtract from timer
-
-    //load next question
 
     //when quiz ends
     //no more questions or timer = 0
