@@ -2,6 +2,7 @@ window.onload = function () {
 
     //constants
     var timer = 75;
+    var timerCountDown;
 
     var questionNumber = 0;
     var questionObjArray = [
@@ -31,13 +32,10 @@ window.onload = function () {
 
     //functions
     var startCountdown = function() {
-        var timerCountDown = setInterval(function () {
+        timerCountDown = setInterval(function () {
             if (timer > 0) {
                 timerEl.textContent = 'Time: ' + timer;
                 timer--;
-            }
-            else if (timer === "") {
-                clearInterval(timerCountDown);
             }
             else {
                 timerEl.textContent = 'Time: ' + timer;
@@ -100,6 +98,7 @@ window.onload = function () {
                 //add feedback
                 var feedback = "Wrong :(";
                 //subtract from timer
+                timer = timer - 10;
             }
         }
         feedbackEl.textContent = feedback;
@@ -118,34 +117,48 @@ window.onload = function () {
         }
     }
 
+    
+    //when quiz ends
     var endQuiz = function() {
         //freeze time / set score
+        clearInterval(timerCountDown);
+        timerEl.textContent = 'Time: ' + timer;
         var score = timer;
-        timer = "";
-        timerEl.textContent = 'Time: ' + score;
 
         //clear question
         mainEl.removeChild(document.querySelector(".question"));
         
-        //header
+        //add done header
         var finalHeader = document.createElement("h1");
         finalHeader.textContent = "All Done!";
+        mainEl.appendChild(finalHeader);
 
-
+        //final score
         var finalScore = document.createElement("h2");
         finalScore.textContent = "Your final score is " + score;
+        mainEl.appendChild(finalScore); 
 
-        mainEl.appendChild(finalHeader);
-        mainEl.appendChild(finalScore);   
+        //add initials
+        var initialsDiv = document.createElement("div");
+        initialsDiv.className = "intials-input";
+
+        var initialsText = document.createElement("p");
+        initialsText.textContent = "Enter intials:";
+        initialsDiv.appendChild(initialsText); 
+
+        var initialsInput = document.createElement("input");
+        initialsDiv.appendChild(initialsInput); 
+
+        //submit button
+        var saveScoreButton = document.createElement("button");
+        saveScoreButton.className = "button";
+        saveScoreButton.textContent = "Submit";
+        initialsDiv.appendChild(saveScoreButton); 
+
+        mainEl.appendChild(initialsDiv); 
     }
 
-
-    //when quiz ends
-    //no more questions or timer = 0
-    //add done header
-    //final score
-    //add initials
-    //submit button
+    
 
     //when submit button is clicked
     //high score board
