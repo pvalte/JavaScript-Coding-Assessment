@@ -1,0 +1,39 @@
+:root {
+    --primary-color: rgb(253, 108, 225);
+    --secondary-color: rgb(64, 47, 234);
+    --tertiary-color: rgb(174, 235, 254);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* header styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+header a {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+/* main styling */
+main {
+    text-align: center;
+}
+
+main h1 {
+    margin: 20px;
+}
+
+button {
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    margin: 10px;
+}
