@@ -175,6 +175,7 @@ window.onload = function () {
         //header
         var highScoreHeader = document.createElement("h1");
         highScoreHeader.textContent = "High scores";
+        highScoreBoardDiv.appendChild(highScoreHeader);
         
         //list
         var highScoreList = document.createElement("ul");
@@ -187,12 +188,20 @@ window.onload = function () {
             highScore.className = "highscore";
             highScoreList.appendChild(highScore);
         }
-
-        highScoreBoardDiv.appendChild(highScoreHeader);
         highScoreBoardDiv.appendChild(highScoreList);
+
+        //buttons
+        var backButton = document.createElement("button");
+        backButton.className = "button";
+        backButton.textContent = "Go Back";
+        highScoreBoardDiv.appendChild(backButton); 
+
+        var clearButton = document.createElement("button");
+        clearButton.className = "button";
+        clearButton.textContent = "Clear high scores";
+        highScoreBoardDiv.appendChild(clearButton); 
+
         mainEl.appendChild(highScoreBoardDiv);
-
-
     }
 
     //when "start button" is clicked, start quiz
