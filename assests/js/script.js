@@ -159,15 +159,47 @@ window.onload = function () {
         initialsDiv.appendChild(saveScoreButton); 
 
         contentEl.appendChild(initialsDiv); 
+
+        //when submit button is clicked, display high score board
+        saveScoreButton.addEventListener("click", displayHighScoreBoard)
     }
 
-    
+    var displayHighScoreBoard = function() {
+        mainEl.removeChild(contentEl);
+        answerFeedbackEl.textContent = '';
 
-    //when submit button is clicked
-    //high score board
+        //div to hold question
+        var highScoreBoardDiv = document.querySelector("div");
+        highScoreBoardDiv.className = "highscore-board";
+        
+        //header
+        var highScoreHeader = document.createElement("h1");
+        highScoreHeader.textContent = "High scores";
+        
+        //list
+        var highScoreList = document.createElement("ul");
+        highScoreList.className = "highscore-list";
 
+        var highScoreArray = [22, 73];
+        for (var i = 0; i < highScoreArray.length; i++) {
+            var highScore = document.createElement("li");
+            highScore.textContent = highScoreArray[i];
+            highScore.className = "highscore";
+            highScoreList.appendChild(highScore);
+        }
+
+        highScoreBoardDiv.appendChild(highScoreHeader);
+        highScoreBoardDiv.appendChild(highScoreList);
+        mainEl.appendChild(highScoreBoardDiv);
+
+
+    }
 
     //when "start button" is clicked, start quiz
     startButtonEl.addEventListener("click", startQuiz)
+    
+
+    
+
 
 }
