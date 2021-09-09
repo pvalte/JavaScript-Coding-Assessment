@@ -26,8 +26,9 @@ window.onload = function () {
     //elements
     var timerEl = document.querySelector('#timer');
     var mainEl = document.querySelector('#main');
+    var contentEl = document.querySelector('#content');
     var homepageEl = document.querySelector('#homepage');
-    var feedbackEl = document.querySelector('#answer-feedback');
+    var answerFeedbackEl = document.querySelector('#answer-feedback');
     var startButtonEl = document.querySelector('#start-button');
 
     //functions
@@ -80,7 +81,7 @@ window.onload = function () {
 
         questionDivEl.appendChild(questionHeader);
         questionDivEl.appendChild(answersList);
-        mainEl.appendChild(questionDivEl);
+        contentEl.appendChild(questionDivEl);
 
         //handle click of answer
         questionDivEl.addEventListener("click", answerHandler);
@@ -101,13 +102,13 @@ window.onload = function () {
                 timer = timer - 10;
             }
         }
-        feedbackEl.textContent = feedback;
+        answerFeedbackEl.textContent = feedback;
 
         //next question
         questionNumber++;
         if (questionNumber < questionObjArray.length) {
             //clear question
-            mainEl.removeChild(document.querySelector(".question"));
+            contentEl.removeChild(document.querySelector(".question"));
 
             //next question
             createQuestion(questionObjArray[questionNumber]);
@@ -126,17 +127,17 @@ window.onload = function () {
         var score = timer;
 
         //clear question
-        mainEl.removeChild(document.querySelector(".question"));
+        contentEl.removeChild(document.querySelector(".question"));
         
         //add done header
         var finalHeader = document.createElement("h1");
         finalHeader.textContent = "All Done!";
-        mainEl.appendChild(finalHeader);
+        contentEl.appendChild(finalHeader);
 
         //final score
         var finalScore = document.createElement("h2");
         finalScore.textContent = "Your final score is " + score;
-        mainEl.appendChild(finalScore); 
+        contentEl.appendChild(finalScore); 
 
         //add initials
         var initialsDiv = document.createElement("div");
@@ -144,9 +145,11 @@ window.onload = function () {
 
         var initialsText = document.createElement("p");
         initialsText.textContent = "Enter intials:";
+        initialsText.className = "intials-text";
         initialsDiv.appendChild(initialsText); 
 
         var initialsInput = document.createElement("input");
+        initialsInput.className = "intials-textbox";
         initialsDiv.appendChild(initialsInput); 
 
         //submit button
@@ -155,7 +158,7 @@ window.onload = function () {
         saveScoreButton.textContent = "Submit";
         initialsDiv.appendChild(saveScoreButton); 
 
-        mainEl.appendChild(initialsDiv); 
+        contentEl.appendChild(initialsDiv); 
     }
 
     

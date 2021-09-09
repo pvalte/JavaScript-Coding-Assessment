@@ -70,8 +70,20 @@ button {
     background-color: var(--tertiary-color);
 }
 
+.answer-feedback {
+    color: gray;
+    margin: 20px;
+    border-top: gray solid 1px;
+    width: 100%;
+}
 
 .intials-input {
     display: flex;
     justify-content: center;
+}
+
+.intials-text,
+.intials-textbox {
+    padding: 5px 0px;
+    margin: 10px 0px;
 }
