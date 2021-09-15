@@ -8,6 +8,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 /* header styling */
@@ -18,8 +19,7 @@ header {
     padding: 20px;
 }
 
-header a {
-    text-decoration: none;
+.view-high-scores {
     color: var(--secondary-color);
 }
 
@@ -29,7 +29,7 @@ main {
 }
 
 main h1 {
-    margin: 20px;
+    margin: 20px 0;
     width: 100%;
     font-size: 30px;
 }

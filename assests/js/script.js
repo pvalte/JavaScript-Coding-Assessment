@@ -5,21 +5,48 @@ window.onload = function () {
     var timerCountDown;
 
     var questionNumber = 0;
+    
+    //source: https://www.w3schools.com/quiztest/
     var questionObjArray = [
         {
-            question: "What is your favorite color?",
-            answers: ["red", "blue", "purple", "orange"],
-            correctAnswer: "blue"
+            question: "1. Inside which HTML element do we put the JavaScript?",
+            answers: ["<scripting>", "<js>", "<script>", "<javascript>"],
+            correctAnswer: "<script>"
         },
         {
-            question: "What is your favorite food?",
-            answers: ["yogurt", "pizza", "yams", "orzo"],
-            correctAnswer: "yams"
+            question: "2. How do you create a function in JavaScript?",
+            answers: ["function:myFunction()", "function myFunction()", "function = myFunction()"],
+            correctAnswer: "function myFunction()"
         },
         {
-            question: "What is your favorite season?",
-            answers: ["fall", "winter", "summer", "spring"],
-            correctAnswer: "fall"
+            question: "3. True or False: JavaScript is the same as Java",
+            answers: ["True", "False"],
+            correctAnswer: "False"
+        },
+        {
+            question: "4. How can you add a comment in a JavaScript?",
+            answers: ["//This is a comment", "'This is a comment", "<!--This is a comment-->"],
+            correctAnswer: "//This is a comment"
+        },
+        {
+            question: "5. What is the correct way to write a JavaScript array?",
+            answers: ["var colors = ['red', 'green', 'blue']", "var colors = (1:'red', 2:'green', 3:'blue')", "var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')", "var colors = 'red', 'green', 'blue'"],
+            correctAnswer: "var colors = ['red', 'green', 'blue']"
+        },
+        {
+            question: "6. How do you round the number 7.25, to the nearest integer?",
+            answers: ["round(7.25)", "rnd(7.25)", "Math.rnd(7.25)", "Math.round(7.25)"],
+            correctAnswer: "Math.round(7.25)"
+        },
+        {
+            question: "7. How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
+            answers: ["if (i<>5)", "if i<>5", "if (i!=5)", "if i=!5 then"],
+            correctAnswer: "if (i!=5)"
+        },
+        {
+            question: "8. What will the following code return: Boolean(10 > 9)",
+            answers: ["true", "NaN", "false"],
+            correctAnswer: "true"
         }
     ]
 
@@ -188,9 +215,12 @@ window.onload = function () {
     }
 
     var displayHighScoreBoard = function() {
-        //clear questions and feedback
+        //clear questions, feedback, header
         mainEl.removeChild(contentEl);
         mainEl.removeChild(answerFeedbackEl);
+        viewHighScoreEl.textContent = "";
+        timerEl.textContent = "";
+        
 
         //div to hold highscore
         var highScoreBoardDiv = document.createElement("div");
@@ -212,11 +242,15 @@ window.onload = function () {
 
         savedHighScores = JSON.parse(savedHighScores);
 
-        //TO DO: sort by highest??
+        //sort by high score. Source: https://www.javascripttutorial.net/array/javascript-sort-an-array-of-objects/
+        savedHighScores.sort((a, b) => {
+            return b.score - a.score;
+        });
+
         //Create table
         for (var i = 0; i < savedHighScores.length; i++) {
             var highScore = document.createElement("li");
-            highScore.textContent = (i+1) + ". " + savedHighScores[i].name + " " + savedHighScores[i].score;
+            highScore.textContent = (i+1) + ". " + savedHighScores[i].name + " - " + savedHighScores[i].score;
             highScore.className = "highscore";
             highScoreList.appendChild(highScore);
         }
