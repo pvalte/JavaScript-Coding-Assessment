@@ -1,6 +1,6 @@
 :root {
-    --primary-color: rgb(253, 108, 225);
-    --secondary-color: rgb(64, 47, 234);
+    --primary-color: rgb(64, 47, 234);
+    --secondary-color: rgb(253, 108, 225);
     --tertiary-color: rgb(174, 235, 254);
 }
 
@@ -42,6 +42,7 @@ main h2 {
 
 button {
     background-color: var(--primary-color);
+    color: white;
     border-radius: 8px;
     padding: 5px 10px;
     margin: 10px;
@@ -60,6 +61,7 @@ button {
 
 .answer {
     background-color: var(--primary-color);
+    color: white;
     border-radius: 8px;
     padding: 5px 10px;
     margin: 5px;
@@ -67,7 +69,7 @@ button {
 }
 
 .answer:hover {
-    background-color: var(--tertiary-color);
+    background-color: var(--secondary-color);
 }
 
 .answer-feedback {

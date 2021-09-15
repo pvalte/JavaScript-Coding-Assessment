@@ -24,6 +24,7 @@ window.onload = function () {
     ]
 
     //elements
+    var viewHighScoreEl = document.querySelector('#view-high-scores');
     var timerEl = document.querySelector('#timer');
     var mainEl = document.querySelector('#main');
     var contentEl = document.querySelector('#content');
@@ -161,14 +162,36 @@ window.onload = function () {
         contentEl.appendChild(initialsDiv); 
 
         //when submit button is clicked, display high score board
-        saveScoreButton.addEventListener("click", displayHighScoreBoard)
+        saveScoreButton.addEventListener("click", function() {
+            //save initials and score to local storage
+            var highScoreObj = {
+                name: initialsInput.value,
+                score: score,
+            };
+
+            //Get array from local storage
+            savedHighScores = localStorage.getItem("highscores");
+            savedHighScores = JSON.parse(savedHighScores);
+            if (!savedHighScores) {
+                savedHighScores = [];
+            }
+
+            //add new score to array and push back to local storage
+            savedHighScores.push(highScoreObj);
+            localStorage.setItem("highscores", JSON.stringify(savedHighScores));
+
+            //display hgih score page
+            displayHighScoreBoard();
+        })
+        
     }
 
     var displayHighScoreBoard = function() {
+        
         mainEl.removeChild(contentEl);
         answerFeedbackEl.textContent = '';
 
-        //div to hold question
+        //div to hold highscore
         var highScoreBoardDiv = document.querySelector("div");
         highScoreBoardDiv.className = "highscore-board";
         
@@ -181,10 +204,20 @@ window.onload = function () {
         var highScoreList = document.createElement("ul");
         highScoreList.className = "highscore-list";
 
-        var highScoreArray = [22, 73];
-        for (var i = 0; i < highScoreArray.length; i++) {
+        //Get array from local storage
+        savedHighScores = localStorage.getItem("highscores");
+
+        if (!savedHighScores) {
+            return false;
+        }
+
+        savedHighScores = JSON.parse(savedHighScores);
+
+        //TO DO: sort by highest??
+        //Create table
+        for (var i = 0; i < savedHighScores.length; i++) {
             var highScore = document.createElement("li");
-            highScore.textContent = highScoreArray[i];
+            highScore.textContent = (i+1) + ". " + savedHighScores[i].name + " " + savedHighScores[i].score;
             highScore.className = "highscore";
             highScoreList.appendChild(highScore);
         }
@@ -202,10 +235,25 @@ window.onload = function () {
         highScoreBoardDiv.appendChild(clearButton); 
 
         mainEl.appendChild(highScoreBoardDiv);
+
+        //when Go Back button is clicked, return to homepage (refresh)
+        backButton.addEventListener("click", function() {
+            reload = location.reload();
+        });
+
+        //when clear high button is clicked, clear local storage and refresh score board
+        clearButton.addEventListener("click", function() {
+            localStorage.clear();
+            highScoreBoardDiv.removeChild(highScoreList);
+        })
     }
+
+    //when "view high score" link is clicked, display high scores
+    viewHighScoreEl.addEventListener("click", displayHighScoreBoard)
 
     //when "start button" is clicked, start quiz
     startButtonEl.addEventListener("click", startQuiz)
+
     
 
     
