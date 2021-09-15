@@ -26,10 +26,13 @@ window.onload = function () {
     //elements
     var viewHighScoreEl = document.querySelector('#view-high-scores');
     var timerEl = document.querySelector('#timer');
+    
     var mainEl = document.querySelector('#main');
+    var headingEl = document.querySelector('#heading');
     var contentEl = document.querySelector('#content');
     var homepageEl = document.querySelector('#homepage');
     var answerFeedbackEl = document.querySelector('#answer-feedback');
+
     var startButtonEl = document.querySelector('#start-button');
 
     //functions
@@ -49,7 +52,7 @@ window.onload = function () {
 
     var startQuiz = function () {
         //clear '#home-page' elements
-        mainEl.removeChild(homepageEl);
+        contentEl.removeChild(homepageEl);
 
         //start timer
         startCountdown();
@@ -60,13 +63,14 @@ window.onload = function () {
     }
 
     var createQuestion = function (questionObj) {    
+        console.log(headingEl.textContent);
+        
         //div to hold question
         var questionDivEl = document.createElement("div");
         questionDivEl.className = "question";
         
         //header
-        var questionHeader = document.createElement("h1");
-        questionHeader.textContent = questionObj.question;
+        headingEl.textContent = questionObj.question;
         
         //options
         var answersList = document.createElement("ul");
@@ -80,7 +84,6 @@ window.onload = function () {
             answersList.appendChild(answer);
         }
 
-        questionDivEl.appendChild(questionHeader);
         questionDivEl.appendChild(answersList);
         contentEl.appendChild(questionDivEl);
 
@@ -129,11 +132,9 @@ window.onload = function () {
 
         //clear question
         contentEl.removeChild(document.querySelector(".question"));
-        
-        //add done header
-        var finalHeader = document.createElement("h1");
-        finalHeader.textContent = "All Done!";
-        contentEl.appendChild(finalHeader);
+
+        //header
+        headingEl.textContent = "All Done!";
 
         //final score
         var finalScore = document.createElement("h2");
@@ -187,18 +188,16 @@ window.onload = function () {
     }
 
     var displayHighScoreBoard = function() {
-        
+        //clear questions and feedback
         mainEl.removeChild(contentEl);
-        answerFeedbackEl.textContent = '';
+        mainEl.removeChild(answerFeedbackEl);
 
         //div to hold highscore
-        var highScoreBoardDiv = document.querySelector("div");
+        var highScoreBoardDiv = document.createElement("div");
         highScoreBoardDiv.className = "highscore-board";
-        
+
         //header
-        var highScoreHeader = document.createElement("h1");
-        highScoreHeader.textContent = "High scores";
-        highScoreBoardDiv.appendChild(highScoreHeader);
+        headingEl.textContent = "High scores";
         
         //list
         var highScoreList = document.createElement("ul");
