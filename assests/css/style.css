@@ -1,7 +1,6 @@
 :root {
     --primary-color: rgb(64, 47, 234);
-    --secondary-color: rgb(253, 108, 225);
-    --tertiary-color: rgb(174, 235, 254);
+    --secondary-color: rgb(207, 108, 253);
 }
 
 * {
@@ -68,7 +67,8 @@ button {
     width: 100%;
 }
 
-.answer:hover {
+.answer:hover,
+button:hover {
     background-color: var(--secondary-color);
 }
 
@@ -78,13 +78,21 @@ button {
     border-top: gray solid 1px;
 }
 
-.intials-input {
+.initials-input {
     display: flex;
     justify-content: center;
 }
 
-.intials-text,
-.intials-textbox {
+.initials-text,
+.initials-textbox {
     padding: 5px 0px;
     margin: 10px 0px;
+}
+
+.highscore {
+    background-color: rgb(201, 198, 233);
+    padding: 5px 0px;
+    margin: 10px auto;
+    width: 20%;
+    list-style: none;
 }

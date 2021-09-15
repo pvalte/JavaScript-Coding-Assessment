@@ -170,15 +170,15 @@ window.onload = function () {
 
         //add initials
         var initialsDiv = document.createElement("div");
-        initialsDiv.className = "intials-input";
+        initialsDiv.className = "initials-input";
 
         var initialsText = document.createElement("p");
-        initialsText.textContent = "Enter intials:";
-        initialsText.className = "intials-text";
+        initialsText.textContent = "Enter initials:";
+        initialsText.className = "initials-text";
         initialsDiv.appendChild(initialsText); 
 
         var initialsInput = document.createElement("input");
-        initialsInput.className = "intials-textbox";
+        initialsInput.className = "initials-textbox";
         initialsDiv.appendChild(initialsInput); 
 
         //submit button
